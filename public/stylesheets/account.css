@@ -1,0 +1,185 @@
+.acc {
+    display: flex;
+    justify-content: center;
+}
+
+.account {
+
+    border: 2px solid rgba(128, 128, 128, 0.351);
+    border-radius: 30px;
+    padding: 30px;
+    width: 70%;
+    height: 600px;
+    background-color: rgba(248, 248, 255, 0.493);
+    box-shadow: 0 0 10px 0 rgb(130, 129, 129);
+    position: relative;
+}
+
+.proceed th {
+    font-size: 20px;
+    color: grey;
+}
+
+.account h2 {
+    font-weight: 300;
+    border-bottom: 1px solid grey;
+    width: 300px;
+}
+
+input,
+label {
+    margin: 5px 5px;
+}
+
+.form-group {
+    margin: 30px auto;
+    width: 450px;
+}
+
+.form-control {
+    float: left;
+}
+
+#inputStreet {
+    width: 100%;
+}
+
+#inputCity {
+    width: 50%;
+}
+
+#inputState {
+    width: 15%;
+}
+
+#inputZip {
+    width: 28%;
+}
+
+#inputCounty {
+    width: 45%;
+}
+
+#inputCountry {
+    width: 50%;
+}
+
+.account-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color: gray;
+}
+
+.adress-details {
+    margin-top: 30px;
+    color: gray;
+}
+
+.account-sum {
+    display: flex;
+}
+
+.account-sum div {
+    margin: 20px;
+}
+
+.account-sum div span {
+    font-size: 50px;
+}
+
+.account-sum div p {
+    text-align: center;
+}
+
+@media (max-width:799px) {
+
+    .account {
+        height: 600px;
+    }
+
+    .account h2 {
+        font-weight: bold;
+        border-bottom: 0px !important;
+        width: 200px !important;
+        font-size: small;
+    }
+
+    .account-sum {
+        display: none;
+    }
+
+    .adress-details {
+        margin-top: 30px;
+        color: gray;
+        font-size: small;
+    }
+
+    .account-details {
+        margin-top: 30px;
+        color: gray;
+        font-size: small;
+    }
+
+    .account-details p {
+        width: 100px;
+    }
+
+    .account-sum-mobile {
+        display: flex !important;
+        justify-content: space-around;
+
+    }
+
+    .account-sum-mobile span {
+        font-size: 30px;
+        color: grey;
+    }
+
+    .account-sum-mobile {
+        color: grey;
+        text-align: center;
+        padding: 10px;
+        border-radius: 30px;
+        box-shadow: 0 0 10px 0 rgb(130, 129, 129);
+    }
+
+    #add-address {
+        border: none;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: rgb(86, 69, 48);
+        color: rgb(255, 255, 255);
+        font-weight: 700;
+        margin-bottom: 90px;
+        position: absolute;
+        top: 565px !important;
+        left: 55px;
+    }
+
+}
+
+
+#add-address {
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgb(86, 69, 48);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    margin-bottom: 90px;
+}
+
+.account-sum-mobile {
+    display: none;
+}
+
+.account-sum-mobile a {
+    text-decoration: none;
+    color: grey;
+}
+
+.account-sum a {
+    text-decoration: none;
+    color: grey;
+}

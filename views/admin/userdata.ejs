@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.14/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+</head>
+
+<body>
+    <div class=" container p-30">
+        <div class="row">
+            <div class="col-md-12 main-datatable">
+                <div class="card_body">
+                    <div class="row d-flex">
+                        <div class="col-sm-4 createSegment">
+                        </div>
+                        <div class="col-sm-8 add_flex">
+                            <div class="form-group searchInput">
+                                <label for="email">Search:</label>
+                                <input type="search" class="form-control" id="filterbox" placeholder=" ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x">
+                        <table id="filtertable" class="table cust-datatable dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th style="min-width:50px;">ID</th>
+                                    <th style="min-width:150px;">Name</th>
+                                    <th style="min-width:150px;">Email</th>
+                                    <th style="min-width:100px;">Mobile</th>
+                                    <th style="min-width:100px;">Accecs</th>
+                                    <th style="min-width:150px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% user.forEach(function(value) { %>
+                                    <tr>
+                                        <td>
+                                            <%=value.id %>
+                                        </td>
+                                        <td>
+                                            <%=value.name %>
+                                        </td>
+                                        <td>
+                                            <%=value.email %>
+                                        </td>
+                                        <td>
+                                            <%=value.mobile%>
+                                        </td>
+                                        <td>
+                                            <% if(value.status){ %>
+                                                <span class="mode mode_on">Active</span>
+                                                <% } else{ %>
+                                                    <span class="mode mode_off">Blocked</span>
+                                                    <% } %>
+                                        </td>
+                                        <td>
+                                            <% if(value.status){ %>
+                                                <form action="/admin/blockuser/<%=value.id %>" method="get">
+                                                    <button id="acc_btn">Block</button>
+                                                </form>
+                                                <% } else{ %>
+                                                    <form action="/admin/activeuser/<%=value.id %>" method="get">
+                                                        <button id="acc_btn">Unblock</button>
+                                                    </form>
+
+                                                    <% } %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.14/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('#filtertable').DataTable({
+                "pageLength": 5,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': ['nosort'],
+                }],
+                columnDefs: [
+                    { type: 'date-dd-mm-yyyy', aTargets: [5] }
+                ],
+                "aoColumns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                "order": false,
+                "bLengthChange": false,
+                "dom": '<"top">ct<"top"p><"clear">'
+            });
+            $("#filterbox").keyup(function () {
+                dataTable.search(this.value).draw();
+            });
+        });
+
+    </script>
+</body>
+
+</html>

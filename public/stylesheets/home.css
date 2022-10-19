@@ -1,0 +1,111 @@
+#categories {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+#categories .pro {
+    height: 310px;
+    width: 290px;
+    border-radius: 30px;
+    position: relative;
+}
+
+#accessories {
+    background-image: url("../img/accessories.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#man {
+    background-image: url("../img/men.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#women {
+    background-image: url("../img/women.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shop {
+    width: 70%;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.shop a,
+.shop a:hover {
+    color: #cead8b;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#best h1 {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 100px;
+    padding: 5px;
+    border-top: 2px solid #cead8b;
+    border-bottom: 2px solid #cead8b;
+    width: 50%;
+    font-weight: lighter;
+}
+
+@media (max-width:799px) {
+    #categories {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    #categories .pro {
+        height: 250px;
+        width: 230px;
+        border-radius: 30px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+    }
+
+    .shop {
+        width: 80%;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background-color: rgb(255, 255, 255);
+        border: none;
+        padding: 10px;
+        border-radius: 10px;
+
+    }
+
+    #best h1 {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        margin-top: 100px;
+        padding: 5px;
+        border-top: 2px solid #cead8b;
+        border-bottom: 2px solid #cead8b;
+        width: 80%;
+        font-size: 20px;
+        font-weight: lighter;
+    }
+}

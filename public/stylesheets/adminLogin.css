@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../img/admin-bck3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+}
+
+/* align items center vertically and horizontally  */
+.container {
+    display: flex;
+    justify-content: end;
+    align-items: center !important;
+    height: 80vh;
+    padding: 200px;
+}
+
+.form {
+    width: 300px;
+    height: 350px;
+    background-color: rgba(1, 1, 1, 0.614);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.btn button {
+    padding: 3px;
+    margin: 30px 0px 40px 30px;
+    border-style: none;
+    background-color: transparent;
+    color: beige;
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: center;
+}
+
+.formGroup input {
+    border: none;
+    width: 80%;
+    border-bottom: 2px solid white;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+    color: white;
+}
+
+input:focus {
+    outline: none !important;
+    border-bottom: 2px solid #ddb386;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}
+
+.checkBox {
+    display: flex;
+    justify-content: center;
+    margin: 16px !important;
+}
+
+#checkbox {
+    margin-right: 10px;
+    height: 15px;
+    width: 15px;
+}
+
+.text {
+    color: rgb(199, 197, 197);
+    font-size: 13px;
+}
+
+.btn2 {
+    padding: 10px;
+    width: 150px;
+    border-radius: 20px;
+    background-color: rgb(10, 136, 43);
+    border-style: none;
+    color: white;
+    font-weight: 600;
+}
+
+.btn2:hover {
+    background-color: rgba(10, 136, 43, 0.5);
+}
+
+.btn button:hover {
+    border-bottom: 2px solid rgb(91, 243, 131);
+}
+
+/* hide signup form */
+.login {
+    display: none;
+}
+
+/* Login form code */
+.login {
+    margin-top: 40px;
+}
+
+.login .checkBox {
+    margin-top: 30px !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+@media (max-width:799px) {
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center !important;
+        height: 80vh;
+        padding: 0px !important;
+    }
+
+    .form {
+        width: 250px !important;
+        height: 300px !important;
+        background-color: rgba(1, 1, 1, 0.416);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+    }
+
+    .formGroup input {
+        border: none;
+        width: 80%;
+        border-bottom: 2px solid white;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 7px;
+        font-weight: bold;
+        background-color: transparent;
+        color: white;
+    }
+
+    #sgn {
+        font-size: 10px !important;
+        padding-top: 25px !important;
+    }
+}
+
+#sgn {
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 50px;
+}
+
+#sgn a {
+    text-decoration: none;
+    color: #ddb386;
+    font-weight: 700;
+
+}
+
+#err {
+    padding: 7px;
+    text-align: center;
+    color: red;
+    font-weight: 500;
+    font-size: small;
+}

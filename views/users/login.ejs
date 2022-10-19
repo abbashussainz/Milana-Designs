@@ -1,0 +1,90 @@
+<%- include('partials/navbar.ejs'); -%>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheets/login.css">
+
+        <!-- jQuery CDN Link -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <title>Transparent form</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="form">
+                <div class="btn">
+                    <button class="signUpBtn">login</button>
+                </div>
+                <form class="signUp" id="form" action="/login" method="post">
+                    <div class="formGroup">
+                        <input type="email" id="email" placeholder="Email ID" name="email" required autocomplete="off">
+                    </div>
+                    <div class="formGroup">
+                        <input type="password" id="password" placeholder="Password" name="password" required
+                            autocomplete="off">
+                    </div>
+                    <div class="formGroup">
+                        <button type="submit" class="btn2">login</button>
+                    </div>
+                    <% if (errors) { %>
+                        <% if (errors.email) { %>
+                            <div id="err">
+                                This email is not registered
+                            </div>
+                            <% } %>
+                                <% if (errors.password) { %>
+                                    <div id="err">
+                                        password is incorrect
+                                    </div>
+                                    <% } %>
+                                        <% if (errors.status) { %>
+                                            <div id="err">
+                                                This account have been blocked
+                                            </div>
+                                            <% } %>
+                                                <% } %>
+                                                    <div id="sgn">
+                                                        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                                                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function ($) {
+
+                $("#form").validate({
+                    rules: {
+                        name: "required",
+                        password: {
+                            required: true
+                        }
+                    },
+                    messages: {
+
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.is(":radio")) {
+                            error.appendTo(element.parents('.formGroup'));
+                            $(".formGroup input").css(" margin-bottom", "5px")
+                        }
+                        else { // This is the default behavior 
+                            error.insertAfter(element);
+                        }
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+
+                });
+            });
+        </script>
+    </body>
+
+    </html>
+
+    <%- include('partials/footer.ejs'); -%>

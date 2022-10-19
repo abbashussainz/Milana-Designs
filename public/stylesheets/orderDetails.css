@@ -1,0 +1,21 @@
+#address {
+    margin: 50px;
+    border: 1px solid rgba(128, 128, 128, 0.552);
+    width: 70%;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px 0 rgb(130, 129, 129);
+}
+
+#address p {
+    color: grey;
+}
+
+
+#address h4 {
+    font-weight: 700;
+}
+
+table {
+    box-shadow: 0 0 10px 0 rgb(130, 129, 129);
+}

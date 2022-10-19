@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/adminLogin.css">
+    <title>Milana Designs</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- jQuery CDN Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <title>form</title>
+    <style>
+        @media (min-width: 768px) {
+            .sb-sidenav {
+                margin-top: 0px !important;
+            }
+        }
+
+        #sidebarToggle {
+            display: none;
+        }
+    </style>
+</head>
+
+<%- include('partials/navbar.ejs'); -%>
+
+    <body>
+
+        <div class="container">
+            <div class="form">
+                <div class="btn">
+                    <button class="signUpBtn">Admin login</button>
+                </div>
+                <form class="signUp" id="form" action="/admin/login" method="post">
+                    <div class="formGroup">
+                        <input type="email" id="email" placeholder="Email ID" name="email" required autocomplete="off">
+                    </div>
+                    <div class="formGroup">
+                        <input type="password" id="password" placeholder="Password" name="password" required
+                            autocomplete="off">
+                    </div>
+                    <div class="formGroup">
+                        <button type="submit" class="btn2">login</button>
+                    </div>
+                </form>
+                <% if (!auth) { %>
+                    <div id="err">
+                        Credentials are invalid
+                    </div>
+                    <% } %>
+            </div>
+
+        </div>
+        <script src="javascripts/login.js"></script>
+    </body>
+
+</html>
+
+<%- include("partials/footer.ejs"); -%>

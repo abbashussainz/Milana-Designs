@@ -1,0 +1,176 @@
+<link rel="stylesheet" href="/stylesheets/admindashboard.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+<div class="static container">
+    <div class="static-box">
+        <div class="static-data mt-3">
+            <div>
+                <h4>
+                    <%=userCount%>
+                </h4>
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar" id="user" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div>
+                <h6>No of users</h6>
+            </div>
+        </div>
+        <div>
+            <span id="static-icon" class="material-symbols-outlined">
+                group
+            </span>
+        </div>
+    </div>
+    <div class="static-box">
+        <div class="static-data mt-3">
+            <div>
+                <h4>
+                    <%=orderCount%>
+                </h4>
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                        aria-valuemax="100" id="order"></div>
+                </div>
+            </div>
+            <div>
+                <h6>no of orders</h6>
+            </div>
+        </div>
+        <div>
+            <span id="static-icon" class="material-symbols-outlined">
+                shopping_bag
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="static container">
+    <div class="static-box">
+        <div class="static-data mt-3">
+            <div>
+                <h4>
+                    <%=totalAmount%>
+                </h4>
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                        aria-valuemax="100" id="amount"></div>
+                </div>
+            </div>
+            <div>
+                <h6>total tunrover</h6>
+            </div>
+        </div>
+        <div>
+            <span id="static-icon" class="material-symbols-outlined">
+                account_balance
+            </span>
+        </div>
+    </div>
+    <div class="static-box">
+        <div class="static-data mt-3">
+            <div>
+                <h4>
+                    <%=productCount%>
+                </h4>
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                        aria-valuemax="100" id="product"></div>
+                </div>
+            </div>
+            <div>
+                <h6>No of Product</h6>
+            </div>
+        </div>
+        <div>
+            <span id="static-icon" class="material-symbols-outlined">
+                inventory_2
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <canvas id="myChart" style="margin-top: 150px;"></canvas>
+</div>
+
+
+
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+    const pro = "<%= productlist %>"
+    const sold = "<%= productsold %>".split(",")
+    const solddata = []
+    sold.map(x => {
+        solddata.push(parseInt(x));
+    })
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+        type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data: {
+            labels: pro.split(','),
+            datasets: [{
+                label: 'SOLD UNITS',
+                data: solddata,
+                backgroundColor: '#cbb49b8d',
+                borderWidth: 1,
+                borderColor: '#777',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Product Sales',
+                fontSize: 50,
+            },
+            legend: {
+                display: true,
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    bottom: 0,
+                    top: 0
+                }
+            },
+            tooltips: {
+                enabled: true
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        display: false //this will remove only the label
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
+<script>
+    const amount = parseInt("<%=totalAmount%>");
+    const target = (amount / 500000) * 100
+    console.log(target);
+    $("#user").css("width", "<%=userCount%>%")
+    $("#order").css("width", "<%=orderCount%>%")
+    $("#product").css("width", "<%=productCount%>%")
+    $("#amount").css("width", `${target}%`)
+</script>

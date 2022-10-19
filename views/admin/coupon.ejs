@@ -1,0 +1,45 @@
+<div class="container p-5">
+
+    <div class="d-flex flex-column justify-content-center mx-auto " style="width:70%;">
+        <h2 style="font-weight:medium;">Add coupon:</h2>
+        <form method="post" action="/admin/addcoupon" enctype="multipart/form-data">
+            <label class=" m-3" for="form-control" style="font-weight:light;">Coupon name:</label>
+            <input class="form-control m-3" type="text" name="name" id="" placeholder="Enter the price">
+            <label class=" m-3" for="form-control" style="font-weight:light;">Coupon code:</label>
+            <input class="form-control m-3" type="text" name="code" id="" placeholder="Enter the price">
+            <label class=" m-3" for="form-control" style="font-weight:light;">Offer price:</label>
+            <input class="form-control m-3" type="text" name="offer" id="" placeholder="Enter the price">
+            <button class="btn btn-dark m-3">submit</button>
+        </form>
+
+        <div class="table-responsive-lg">
+            <table class="table table-hover mt-5 rounded">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Coupon name</th>
+                        <th scope="col">Coupon code:</th>
+                        <th scope="col">Offer price:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% coupon.forEach(function(value) { %>
+                        <tr>
+                            <td style="font-weight:700;">
+                                <%=value.name%>
+                            </td>
+                            <td style="font-weight:700; color:blue;">
+                                <%=value.code%>
+                            </td>
+                            <td style="font-weight:700; color: green;">
+                                Rs. <%=value.offer%>
+                            </td>
+
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

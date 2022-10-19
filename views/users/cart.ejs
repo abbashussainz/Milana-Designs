@@ -1,0 +1,160 @@
+<%- include('partials/navbar.ejs'); -%>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Responsive Table</title>
+        <link rel="stylesheet" href="/stylesheets/cart.css">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+
+        <% if(total_price!=0){ %>
+            <div class="all">
+                <section id="cart" class="section-p1">
+                    <table width="70%">
+                        <thead>
+                            <tr>
+
+                                <td>Image</td>
+                                <td>Product</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Remove</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% product.forEach(function(value) { %>
+                                <tr>
+                                    <td>
+                                        <img src="<%=value.productId.image1.url%>" alt="" style="border-radius: 10px;">
+                                    </td>
+                                    <td>
+                                        <%=value.productId.name%>
+                                    </td>
+                                    <td>
+                                        ₹ <%=value.productId.totalPrice%>
+                                    </td>
+                                    <td>
+                                        <% if(value.qty> 1){ %>
+                                            <span class="material-symbols-outlined change"
+                                                onclick="changeQuantity('<%=value.productId.id%>','<%=user.id%>',-1)">
+                                                remove
+                                            </span>
+                                            <% } %>
+                                                <span id="qty" style="font-size:25px;">
+                                                    <%=value.qty%>
+                                                </span>
+                                                <% if(value.qty<value.productId.countInStock ){ %>
+                                                    <span class="material-symbols-outlined change"
+                                                        onclick="changeQuantity('<%=value.productId.id%>','<%=user.id%>',1)">
+                                                        add
+                                                    </span>
+                                                    <% } %>
+                                    </td>
+                                    <td>
+                                        <span onclick="remove('<%=value.productId.id%>','<%=user.id%>',1)"
+                                            class="material-symbols-outlined change">
+                                            cancel
+                                        </span>
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="cart-add" class="section-p1">
+                    <div id="subtotal">
+                        <h3>Cart totals</h3>
+                        <table>
+                            <tr>
+                                <td>Cart subtotal</td>
+                                <td>Rs <%=total_price%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>shipping</td>
+                                <td>free</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>Rs <%=total_price%>
+                                </td>
+                            </tr>
+                        </table>
+                        <form action="/checkout" method="post">
+                            <input type="number" value="<%=total_price%>" name="totalprice" hidden>
+                            <button id="checkout"></a>Proceed to checkout</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <% } %>
+                <% if(!product||total_price===0){ %>
+                    <div id="noOrder">
+                        <h1>Your Cart is empty !</h1>
+                        <button id="icon"><a href="/products">Shop now</a><span class="material-symbols-outlined">
+                                arrow_forward
+                            </span></button>
+                    </div>
+                    <% } %>
+
+
+
+                        <script>
+                            function changeQuantity(proID, userID, count) {
+                                $.ajax({
+                                    url: '/change-pro-quantity',
+                                    data: {
+                                        user: userID,
+                                        product: proID,
+                                        count: count,
+                                    },
+                                    method: 'post',
+                                    success: (response) => {
+                                        if (response.change) {
+                                            location.reload();
+                                        }
+                                    }
+                                })
+                            }
+
+                            function remove(proID, userID) {
+                                $.ajax({
+                                    url: '/cart-remove',
+                                    data: {
+                                        user: userID,
+                                        product: proID,
+                                    },
+                                    method: 'post',
+                                    success: (response) => {
+                                        if (response.change) {
+                                            location.reload()
+                                        }
+                                    }
+                                })
+                            }
+                            window.addEventListener("pageshow", function (event) {
+                                var historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+                                if (historyTraversal) {
+                                    // Handle page restore.
+                                    //alert('refresh');
+                                    window.location.reload();
+                                }
+                            });
+
+                        </script>
+
+    </body>
+
+
+    </html>
+    <%- include('partials/footer.ejs'); -%>

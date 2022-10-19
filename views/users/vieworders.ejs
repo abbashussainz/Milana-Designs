@@ -1,0 +1,94 @@
+<%- include('partials/navbar.ejs'); -%>
+    <link rel="stylesheet" href="stylesheets/vieworder.css">
+    <section id="cart" class="section-p1">
+
+        <% if (!order) { %>
+            <div id="noOrder">
+                <h1>No orders yet ! </h1>
+                <button id="icon"><a href="/products">Shop now</a><span class="material-symbols-outlined">
+                        arrow_forward
+                    </span></button>
+            </div>
+
+            <% } %>
+
+                <% if (order) { %>
+                    <div id="box">
+                        <table width="70%">
+                            <thead>
+                                <tr>
+                                    <td>Order ID</td>
+                                    <td>Amount</td>
+                                    <td>Pincode</td>
+                                    <td>Payment</td>
+                                    <td>Status</td>
+                                    <td>Details</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% order.forEach(function(value) { %>
+                                    <tr>
+                                        <td>
+                                            <%=value.id %>
+                                        </td>
+                                        <td>
+                                            Rs.<%=value.totalPrice %>
+                                        </td>
+                                        <td>
+                                            <%=value.deliveryDetails.pincode%>
+                                        </td>
+                                        <td>
+                                            <%=value.paymentMethod%>
+                                        </td>
+                                        <td>
+                                            <% if(value.status=="placed" ){ %>
+                                                <div class="status">
+                                                    <i class="fa fa-cube"
+                                                        style="font-size:24px; color:green; padding-right: 5px;"></i><span
+                                                        style="font-weight: 700;">Order Placed</span>
+                                                </div>
+                                                <% } else if (value.status=="accepted" ){ %>
+                                                    <div class="status">
+                                                        <i class="fa fa-check-square"
+                                                            style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                        <span style="font-weight: 700;">Order Accepted</span>
+                                                    </div>
+                                                    <% } else if(value.status=="shipped" ){ %>
+                                                        <div class="status">
+                                                            <i class="fa fa-truck"
+                                                                style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                            <span style="font-weight: 700;">Order shipped</span>
+                                                        </div>
+                                                        <% }else if(value.status=="delivered" ){ %>
+                                                            <div class="status">
+                                                                <i class="fa fa-gift"
+                                                                    style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                                <span style="font-weight: 700;">Order Delivered</span>
+                                                            </div>
+                                                            <% }else if(value.status=="pending" ){ %>
+                                                                <div class="status">
+                                                                    <i class="fa fa-spinner fa-spin"
+                                                                        style="font-size:24px; padding-right: 5px;"></i>
+                                                                    <span style="font-weight: 700;">Payment
+                                                                        pending</span>
+                                                                </div>
+                                                                <% } %>
+
+                                        </td>
+                                        <td>
+                                            <form action="/orderDetails/<%=value.id%>" method="get">
+                                                <button id="view">View</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
+
+    </section>
+    <a target="_blank" href="https://icons8.com/icon/4255/purchase-order" hidden>Purchase Order icon by Icons8</a>
+
+    <%- include('partials/footer.ejs'); -%>

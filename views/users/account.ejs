@@ -1,0 +1,89 @@
+<%- include('partials/navbar.ejs'); -%>
+
+    <link rel="stylesheet" href="stylesheets/account.css">
+
+    <div class="container mt-5 acc">
+        <div class="account">
+            <h2>Profile details</h2>
+
+            <div class="account-details">
+                <div>
+                    <p>Name: <%=account.name %>
+                    </p>
+                    <p>Email: <%=account.email %>
+                    </p>
+                    <p>mobile: <%=account.mobile %>
+                    </p>
+                </div>
+                <div class="account-sum">
+                    <div>
+                        <a href=" /orders"><span class="material-symbols-outlined">
+                                list_alt
+                            </span>
+                            <p>Orders</p>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="/cart"> <span class="material-symbols-outlined">
+                                shopping_bag
+                            </span>
+                            <p>Cart</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Address details</h5>
+                <% if (address) { %>
+                    <div class="adress-details">
+                        <div>
+                            <p>Name: <%=address.name%>
+                            </p>
+                            <p>Mobile:<%=address.phone%>
+                            </p>
+                            <p>Pincode:<%=address.pincode%>
+                            </p>
+                            <p>Address:<%=address.address%>
+                            </p>
+                            <p>City:<%=address.city%>
+                            </p>
+                        </div>
+                        <form action="/addAddress">
+                            <div>
+                                <button id="add-address">edit address</button>
+                            </div>
+                        </form>
+                    </div>
+                    <% } %>
+                        <% if (!address) { %>
+                            <form action="/addAddress">
+                                <div class="adress-details">
+                                    <button id="add-address">Add Address</button>
+                                </div>
+                            </form>
+                            <% } %>
+                                <div class="account-sum-mobile">
+                                    <div>
+                                        <a href="/orders"><span class="material-symbols-outlined">
+                                                list_alt
+                                            </span>
+                                            <p>Orders</p>
+                                        </a>
+                                    </div>
+
+                                    <div>
+                                        <a href="/cart">
+                                            <span class="material-symbols-outlined">
+                                                shopping_bag
+                                            </span>
+                                            <p>Cart</p>
+                                        </a>
+                                    </div>
+                                </div>
+        </div>
+
+
+    </div>
+
+    <%- include('partials/footer.ejs'); -%>

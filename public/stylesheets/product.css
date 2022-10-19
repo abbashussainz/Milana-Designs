@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+#product1 {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+#product1 .pro {
+    width: 15%;
+    min-width: 250px;
+    /* padding: 0px 0px 10px 0px; */
+    border: 4px solid #cbb49b;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.05);
+    transition: 0.2s ease;
+    margin: 15px 0;
+    position: relative;
+    border-radius: 5px;
+}
+
+#product1 .pro:hover {
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+#product1 .pro img {
+    width: 100%;
+}
+
+#product1 .pro .des {
+    text-align: start;
+    padding: 10px 15px;
+}
+
+#brand {
+    color: #606063;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+#product1 .pro .des h5 {
+    padding-top: 7px;
+    color: black;
+    font-size: 14px;
+    margin: 5px 0px;
+    padding-left: 15px;
+    font-weight: 800;
+}
+
+#product1 .pro .des h4 {
+    padding-top: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+    margin: 5px 0px;
+    font-weight: 600;
+    padding-left: 15px;
+    font-weight: 400;
+}
+
+#product1 .pro .cart {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    background-color: #cbb49b;
+    font-weight: 500;
+    color: black;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#product1 .pro-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
+
+@media (max-width:799px) {
+
+    #product1 .pro {
+        margin-left: 20px;
+    }
+
+    #product1 {
+        margin-left: 20px;
+    }
+
+
+    #search-err {
+        display: flex;
+        justify-content: center;
+        padding: 0px !important;
+        margin-top: 100px !important;
+        font-weight: 500 !important;
+        font-size: medium;
+        width: 70% !important;
+    }
+
+    .search {
+        display: flex;
+        border: 2px solid #cbb49b;
+        padding: 0px;
+        border-radius: 30px;
+        width: 100% !important;
+    }
+
+    .search input {
+        border: none;
+        height: 10px;
+        font-size: smaller !important;
+        font-weight: 600;
+        margin-left: 10px;
+        margin-top: 5px;
+        color: #606063;
+    }
+
+    .search input:focus {
+        outline: none;
+        height: 10px;
+        background-color: white;
+    }
+
+    .search button {
+        background-color: white;
+        border: none;
+    }
+
+    .search button span {
+        font-size: 10px;
+        color: #cbb49b;
+    }
+}
+
+@media (max-width:320px) {
+
+    #product1 .pro {
+        margin-left: 20px;
+    }
+
+    #product1 {
+        margin-left: 0px;
+    }
+
+
+}
+
+.search {
+    display: flex;
+    border: 2px solid #cbb49b;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.search input {
+    border: none;
+    height: 30px;
+    font-size: larger;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #606063;
+}
+
+.search input:focus {
+    outline: none;
+    height: 30px;
+    background-color: white;
+}
+
+.search button {
+    background-color: white;
+    border: none;
+}
+
+.search button span {
+    font-size: 30px;
+    color: #cbb49b;
+}
+
+
+#search-err {
+    padding: 300px;
+    margin: auto;
+    font-weight: 300;
+}

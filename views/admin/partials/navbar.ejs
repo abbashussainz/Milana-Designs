@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milana Designs</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="stylesheet" href="/stylesheets/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+  <!-- navbar -->
+  <section id="header">
+    <div>
+      <a href="/admin/home"><img id="logo" src="/img\logo.png" alt="logo"></a>
+      <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 pl-5" id="sidebarToggle" href="#!"><i
+          class="fas fa-bars"></i></button>
+    </div>
+  </section>
+  <script>
+    const bar = document.getElementById("bar");
+    const close = document.getElementById("close");
+    const nav = document.getElementById("navbar")
+
+    if (bar) {
+      bar.addEventListener("click", () => {
+        nav.classList.add("active");
+      })
+    }
+
+    if (close) {
+      close.addEventListener("click", () => {
+        nav.classList.remove("active");
+      })
+    }
+  </script>
+</body>
+
+</html>

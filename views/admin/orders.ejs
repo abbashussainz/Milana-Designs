@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="/stylesheets/adminorders.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<div class=" head container-fluid">
+    <h1>Order management</h1>
+</div>
+<section id="cart" class="section-p1">
+    <div id="box">
+        <table width="70%">
+            <thead>
+                <tr>
+                    <td>Order ID</td>
+                    <td>Costumer</td>
+                    <td>Amount</td>
+                    <td>Pincode</td>
+                    <td>Payment</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% order.forEach(function(value) { %>
+                    <tr>
+                        <td>
+                            <%=value.id %>
+                        </td>
+                        <td>
+                            <%=value.userId.name %>
+                        </td>
+                        <td>
+                            Rs.<%=value.totalPrice %>
+                        </td>
+                        <td>
+                            <%=value.deliveryDetails.pincode%>
+                        </td>
+                        <td>
+                            <%=value.paymentMethod%>
+                        </td>
+                        <td id="optable">
+                            <div class="status dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <% if(value.status=="placed" ){ %>
+                                    <i class="fa fa-cube"
+                                        style="font-size:24px; color:green; padding-right: 5px;"></i><span
+                                        style="font-weight: 700;">Order Placed</span>
+                                    <% } else if (value.status=="accepted" ){ %>
+                                        <i class="fa fa-check-square"
+                                            style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                        <span style="font-weight: 700;">Order Accepted</span>
+                                        <% } else if(value.status=="shipped" ){ %>
+                                            <i class="fa fa-truck"
+                                                style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                            <span style="font-weight: 700;">Order shipped</span>
+                                            <% }else if(value.status=="delivered" ){ %>
+                                                <i class="fa fa-gift"
+                                                    style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                <span style="font-weight: 700;">Order Delivered</span>
+                                                <% }else if(value.status=="pending" ){ %>
+                                                    <i class="fa fa-spinner fa-spin"
+                                                        style="font-size:24px; padding-right: 5px;"></i>
+                                                    <span style="font-weight: 700;">Payment pending</span>
+                                                    <% } %>
+
+                                                        <% if (value.status!="delivered" ) { %>
+                                                            <div class="dropdown-menu op-table"
+                                                                aria-labelledby="dropdownMenuButton">
+                                                                <h6>Update order status</h6>
+                                                                <div onclick="changestatus('placed','<%=value.id %>')"
+                                                                    class="dropdown-item op">
+                                                                    <i class="fa fa-cube"
+                                                                        style="font-size:24px; color:green; padding-right: 5px;"></i><span
+                                                                        style="font-weight: 700;">Order Placed</span>
+                                                                </div>
+                                                                <div onclick="changestatus('accepted','<%=value.id %>')"
+                                                                    class="dropdown-item op">
+                                                                    <i class="fa fa-check-square"
+                                                                        style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                                    <span style="font-weight: 700;">Order
+                                                                        Accepted</span>
+                                                                </div>
+                                                                <div onclick="changestatus('shipped','<%=value.id %>')"
+                                                                    class="dropdown-item op">
+                                                                    <i class="fa fa-truck"
+                                                                        style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                                    <span style="font-weight: 700;">Order shipped</span>
+                                                                </div>
+                                                                <div onclick="changestatus('delivered','<%=value.id %>')"
+                                                                    class="dropdown-item op">
+                                                                    <i class="fa fa-gift"
+                                                                        style="font-size:24px; color:green;padding-right: 5px;"></i>
+                                                                    <span style="font-weight: 700;">Order
+                                                                        Delivered</span>
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+
+                            </div>
+                        </td>
+                        <td>
+                            <form action="/admin/orderDetails/<%=value.id%>" method="get">
+                                <button id="view">View</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<script>
+    function changestatus(status, id) {
+        $.ajax({
+            url: '/admin/orderstatus',
+            data: {
+                orderID: id,
+                status: status
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.reload();
+                }
+            }
+        })
+    }
+</script>

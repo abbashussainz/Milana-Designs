@@ -1,0 +1,111 @@
+<%- include('partials/navbar.ejs'); -%>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheets/sign.css">
+
+        <!-- jQuery CDN Link -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
+        <title>Sign Up</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="form">
+                <div class="btn">
+                    <button class="signUpBtn">SIGN UP</button>
+                </div>
+                <form class="signUp" id="form" action="/signup" method="post">
+                    <div class="formGroup">
+                        <input type="text" id="username" placeholder="Name" name="name" required autocomplete="off">
+                    </div>
+
+                    <div class="formGroup">
+                        <input type="email" id="email" placeholder="Email ID" name="email" required autocomplete="off">
+                    </div>
+
+                    <div class="formGroup">
+                        <input type="number" placeholder="mobile number" name="mobile" required autocomplete="off">
+                    </div>
+
+                    <div class="formGroup">
+                        <input type="password" id="password" placeholder="Password" name="password" required
+                            autocomplete="off">
+                    </div>
+
+                    <!-- <div class="formGroup">
+                        <input type="password" id="password2" placeholder="Confirm Password" required
+                            name="confirmPassword" autocomplete="off">
+                    </div> -->
+
+                    <div class="formGroup">
+                        <button type="submit" class="btn2">REGISTER</button>
+                    </div>
+                    <% if (errors) { %>
+                        <% if (errors.email) { %>
+                            <div id="err">
+                                This email is already registered
+                            </div>
+                            <% } %>
+                                <% if (errors.mobile) { %>
+                                    <div id="err">
+                                        This mobile is already registered
+                                    </div>
+                                    <% } %>
+
+                                        <% } %>
+                </form>
+            </div>
+        </div>
+        <script>
+
+
+            $(document).ready(function ($) {
+
+                $("#form").validate({
+                    rules: {
+                        name: "required",
+                        password: {
+                            required: true,
+                            minlength: 6
+                        },
+                        mobile: {
+                            required: true,
+                            minlength: 10
+                        },
+                    },
+                    messages: {
+                        password: {
+                            minlength: "password is weak"
+                        },
+                        mobile: {
+                            minlength: "Please enter a valid number"
+                        }
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.is(":radio")) {
+                            error.appendTo(element.parents('.formGroup'));
+                            $(".formGroup input").css(" margin-bottom", "5px")
+                        }
+                        else { // This is the default behavior 
+                            error.insertAfter(element);
+                        }
+                    },
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+
+                });
+            });
+        </script>
+    </body>
+
+    </html>
+
+    <%- include('partials/footer.ejs'); -%>

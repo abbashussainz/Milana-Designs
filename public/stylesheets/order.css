@@ -1,0 +1,229 @@
+.address {
+    margin: 10px;
+}
+
+
+#subtotal {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 5px solid rgb(231, 217, 200);
+    padding: 30px;
+    box-shadow: 0 0 10px 0 rgb(130, 129, 129);
+}
+
+#subtotal h4 {
+    font-weight: 300;
+    padding: 10px;
+    border-bottom: 1px solid rgb(227, 226, 226);
+}
+
+#subtotal h6 {
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#price tr td {
+    font-weight: 400;
+    padding-right: 50PX;
+    padding-bottom: 10PX;
+    padding-top: 10PX;
+    font-size: medium;
+}
+
+#billing-address {
+    font-size: 50px !important;
+    color: rgba(87, 82, 82, 0.63) !important;
+    margin-top: 10px !important;
+}
+
+
+
+
+#checkout {
+    background-color: rgb(120, 79, 28);
+    color: aliceblue;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 30px 30px 30px 0;
+    font-weight: 500;
+}
+
+input[type=radio] {
+    transform: scale(2);
+    margin-left: 50px;
+}
+
+
+#coupon input[type=text],
+select {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 15px;
+}
+
+#coupon {
+    display: flex;
+}
+
+#coupon button {
+    justify-content: center;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 10px;
+    height: 25%;
+    background-color: rgb(120, 79, 28);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: #ccc;
+    font-weight: 700;
+}
+
+#subtotal th {
+    font-size: 30px;
+    color: rgb(157, 152, 152);
+    font-weight: 400;
+}
+
+
+@media (max-width: 880px) {
+    #cart {
+        display: flex;
+    }
+
+    #subtotal {
+        width: 90%;
+        margin-right: 0px !important;
+        padding: 20px;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input[type=radio] {
+        transform: scale(2);
+        margin-left: 0px !important;
+    }
+
+    #price tr td {
+        font-weight: 400;
+        padding-right: 50PX;
+        padding-bottom: 10PX;
+        padding-top: 10PX;
+        font-size: small;
+    }
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
+
+body {
+    margin: 0;
+    font-family: arial, tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    direction: ltr;
+    background: white;
+}
+
+form {
+    margin: 10px auto 0 auto;
+    padding: 30px;
+    width: 700px;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-radius: 10px;
+}
+
+form label {
+    font-size: 14px;
+    color: darkgray;
+    cursor: pointer;
+}
+
+form label,
+form input {
+    float: left;
+    clear: both;
+}
+
+form input {
+    margin: 15px 0;
+    padding: 15px 10px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #bbb;
+    border-radius: 20px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -ms-transition: 0.2s ease all;
+    -o-transition: 0.2s ease all;
+    transition: 0.2s ease all;
+}
+
+form input[type=text]:focus,
+form input[type="password"]:focus {
+    border-color: cornflowerblue;
+}
+
+input[type=submit] {
+    padding: 15px 50px;
+    width: auto;
+    background: #1abc9c;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    clear: right;
+    -webkit-transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -ms-transition: 0.2s ease all;
+    -o-transition: 0.2s ease all;
+    transition: 0.2s ease all;
+}
+
+input[type=submit]:hover {
+    opacity: 0.8;
+}
+
+input[type="submit"]:active {
+    opacity: 0.4;
+}
+
+.forgot,
+.register {
+    margin: 10px;
+    float: left;
+    clear: left;
+    display: inline-block;
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
+.forgot:hover,
+.register:hover {
+    color: darkgray;
+}
+
+@media (max-width:799px) {
+
+    form {
+        margin: 10px auto 0 auto;
+        padding: 30px;
+        width: 300px !important;
+        height: auto;
+        overflow: hidden;
+        background: white;
+        border-radius: 10px;
+    }
+}

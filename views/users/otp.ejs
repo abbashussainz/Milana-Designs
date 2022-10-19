@@ -1,0 +1,44 @@
+<%- include('partials/navbar.ejs'); -%>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheets/otp.css">
+
+        <!-- jQuery CDN Link -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <title>Transparent form</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="form">
+                <form class="signUp" id="form" action="/otp" method="post">
+                    <h3 id="head">Check your mobile</h3>
+                    <h6 id="head-num"> Enter the code sent to<br>
+
+                        +91 <%= mobile%>
+
+                    </h6>
+                    <!-- <input type="number" placeholder="mobile number" name="mobile" required autocomplete="off"
+                        style="display:none"> -->
+                    <div class="formGroup">
+                        <input type="number" placeholder=" Verification code : " name="code" required
+                            autocomplete="off">
+                    </div>
+                    <div class="formGroup">
+                        <button type="submit" class="btn2">Verify</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src=""></script>
+    </body>
+
+    </html>
+
+    <%- include('partials/footer.ejs'); -%>
