@@ -23,13 +23,18 @@ paypal.configure({
 
 
 const products_get = async (req, res) => {
-    let filter = {};
-    if (req.query.categories) {
-        filter = { category: req.query.categories }
+    try {
+        let filter = {};
+        if (req.query.categories) {
+            filter = { category: req.query.categories }
+        }
+        const data = await Product.find(filter).populate('category');
+        res.locals.products = data;
+        res.render("users/products")
+    } catch (error) {
+        res.render("users/404")
     }
-    const data = await Product.find(filter).populate('category');
-    res.locals.products = data;
-    res.render("users/products")
+
 }
 
 const searchProduct = async (req, res) => {
@@ -41,52 +46,64 @@ const searchProduct = async (req, res) => {
 
 
 const productview = async (req, res) => {
-    const id = req.params.id
-    const data = await product.findById(id);
-    res.locals.product = data;
-    res.render("users/productview")
+    try {
+        const id = req.params.id
+        const data = await product.findById(id);
+        res.locals.product = data;
+        res.render("users/productview")
+    }
+    catch (error) {
+        res.render("users/404")
+    }
 }
 
 
 const addtocart = async (req, res) => {
-    const userID = res.locals.user.id
-    const { proID } = req.body
-    const Cart = await cart.findOne({ user: userID })
-    console.log(Cart);
-    if (Cart) {
-        const product_exist = Cart.items.findIndex(product => product.productId.toString() == proID);
-        if (product_exist != -1) {
-            await cart.updateOne({ "items.productId": proID }, { $inc: { 'items.$.qty': 1 } })
-            res.send({ status: true })
+    try {
+        const userID = res.locals.user.id
+        const { proID } = req.body
+        const Cart = await cart.findOne({ user: userID })
+        if (Cart) {
+            const product_exist = Cart.items.findIndex(product => product.productId.toString() == proID);
+            if (product_exist != -1) {
+                await cart.updateOne({ "items.productId": proID }, { $inc: { 'items.$.qty': 1 } })
+                res.send({ status: true })
+            }
+            else {
+                await cart.findOneAndUpdate({ user: userID }, { $push: { items: { productId: proID } } })
+                res.send({ status: true })
+            }
         }
         else {
-            await cart.findOneAndUpdate({ user: userID }, { $push: { items: { productId: proID } } })
+            await cart.create({ user: userID, items: [{ productId: proID }] });
             res.send({ status: true })
         }
     }
-    else {
-        await cart.create({ user: userID, items: [{ productId: proID }] });
-        res.send({ status: true })
+    catch (error) {
+        res.render("users/404")
     }
 }
 
 
 const getcart = async (req, res) => {
-    let total_price = 0;
-    const userID = res.locals.user._id
-    const Cart = await cart.findOne({ user: userID }).populate('items.productId').select("items -_id");
-    if (Cart) {
-        var product = Cart.items;
-        product.map((x) => {
-            total_price = total_price + (x.productId.totalPrice * x.qty)
-        });
+    try {
+        let total_price = 0;
+        const userID = res.locals.user._id
+        const Cart = await cart.findOne({ user: userID }).populate('items.productId').select("items -_id");
+        if (Cart) {
+            var product = Cart.items;
+            product.map((x) => {
+                total_price = total_price + (x.productId.totalPrice * x.qty)
+            });
+        }
+        else {
+            product = null;
+        }
+        res.render("users/cart", { product, total_price })
     }
-    else {
-        product = null;
+    catch (error) {
+        res.render("users/404")
     }
-    res.render("users/cart", { product, total_price })
-
-
 }
 
 const change_cart = async (req, res) => {
@@ -176,7 +193,7 @@ const placeOrder = async (req, res) => {
         await userUtil.dropcart(items.id)
     }
     catch (error) {
-        console.log(error)
+        res.redirect("/cart");
     }
 
 }
@@ -211,7 +228,6 @@ const Paypal = (req, res) => {
     let totalPrice = req.body.totalPrice;
     let orderId = req.body.orderId
     let userId = res.locals.user.id
-    console.log("the paypal is started to worki")
     const create_payment_json = {
         "intent": "sale",
         "payer": {
@@ -245,8 +261,6 @@ const Paypal = (req, res) => {
             throw error;
         } else {
             payment.orderId = orderId
-            console.log(payment)
-
             {
                 for (let i = 0; i < payment.links.length; i++) {
                     if (payment.links[i].rel === 'approval_url') {
@@ -275,13 +289,10 @@ const paypal_success = (req, res) => {
             }
         }]
     };
-    console.log("hey i am here")
     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
         if (error) {
-            console.log(error.response);
             throw error;
         } else {
-            console.log("this payment final")
             res.redirect("/orderSuccess")
 
 
@@ -303,7 +314,6 @@ const viewOrderDetails = async (req, res) => {
 const verifyCoupon = async (req, res) => {
     const { code } = req.body
     const offer = await Coupon.findOne({ code: code })
-    console.log(offer);
     if (offer) {
         const price = offer.offer
         res.send({ status: true, price: price })
@@ -322,7 +332,6 @@ const addAdress_post = async (req, res) => {
     const userId = res.locals.user.id
     const address_Db = await Address.findOne({ UserId: userId })
     if (address_Db) {
-        console.log("hello");
         await Address.findOneAndUpdate({
             userId: userId
         }, {
