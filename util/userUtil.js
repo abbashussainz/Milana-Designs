@@ -34,7 +34,7 @@ const dropcart = async (cartId) => {
 }
 const changestatus = async (orderId) => {
     try {
-        const a = await Order.findOneAndUpdate({ id: orderId }, { "$set": { status: "placed" } })
+        const a = await Order.findByIdAndUpdate(orderId, { "$set": { status: "placed" } })
         console.log(a)
     }
     catch (error) {
